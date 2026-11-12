@@ -8,8 +8,8 @@ edition = "2024"
 license = "MIT OR Apache-2.0"
 rust-version = "1.85"
 authors = ["FireCraft contributors"]
-repository = "https://github.com/DFairGamz/FireCraft"
-homepage = "https://github.com/DFairGamz/FireCraft"
+repository = "https://github.com/VibeCodedSoftware/FireCraft"
+homepage = "https://github.com/VibeCodedSoftware/FireCraft"
 
 [workspace.lints.rust]
 unsafe_code = "forbid"

@@ -1831,7 +1831,7 @@ impl Shell {
                 ui.add_space(6.0);
                 ui.horizontal_wrapped(|ui| {
                     ui.label("This edition:");
-                    ui.hyperlink_to("github.com/DFairGamz/FireCraft", "https://github.com/DFairGamz/FireCraft");
+                    ui.hyperlink_to("github.com/VibeCodedSoftware/FireCraft", "https://github.com/VibeCodedSoftware/FireCraft");
                 });
                 ui.horizontal_wrapped(|ui| {
                     ui.label("Based on the clean-room project by the FireCraft contributors:");

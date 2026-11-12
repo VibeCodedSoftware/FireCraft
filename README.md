@@ -11,7 +11,7 @@ adds a redesigned, modern workspace, a startup screen, and fixes across the draw
 
 ## Download
 
-Get the latest version from the [Releases page](https://github.com/DFairGamz/FireCraft/releases/latest):
+Get the latest version from the [Releases page](https://github.com/VibeCodedSoftware/FireCraft/releases/latest):
 
 | File | What it is |
 |---|---|
