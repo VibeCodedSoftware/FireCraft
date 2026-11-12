@@ -1,0 +1,113 @@
+[package]
+name = "firecraft-fuzz"
+version = "0.0.0"
+publish = false
+edition = "2024"
+
+# Lets `cargo fuzz build` accept this hand-rolled scaffold.
+[package.metadata]
+cargo-fuzz = true
+
+# Standalone workspace (not a member of the root workspace): libfuzzer
+# targets need nightly, the stable driver must never drag nightly-only
+# dependencies into the main build.
+[workspace]
+
+[dependencies]
+doc = { path = "../crates/doc" }
+engine = { path = "../crates/engine" }
+fwpng = { path = "../crates/fwpng" }
+geom = { path = "../crates/geom" }
+vector = { path = "../crates/vector" }
+color = { path = "../crates/color" }
+io = { path = "../crates/io" }
+compose = { path = "../crates/compose" }
+scripting = { path = "../crates/scripting" }
+app-cli = { path = "../crates/app-cli" }
+gif = "0.14.2"
+flate2 = { version = "1", default-features = false, features = ["rust_backend"] }
+serde_json = { version = "1", features = ["float_roundtrip"] }
+libfuzzer-sys = { version = "0.4", optional = true }
+
+[features]
+# cargo fuzz add/build passes `--features fuzzer` implicitly through its
+# own scaffold; here the libfuzzer targets opt in explicitly.
+fuzzer = ["dep:libfuzzer-sys"]
+
+# Stable, deterministic drivers run by `xtask ci` (quick gate).
+[[bin]]
+name = "anchors"
+path = "src/bin/anchors.rs"
+
+[[bin]]
+name = "panic_hunt"
+path = "src/bin/panic_hunt.rs"
+
+[[bin]]
+name = "script_mutation"
+path = "src/bin/script_mutation.rs"
+
+[[bin]]
+name = "control_channel"
+path = "src/bin/control_channel.rs"
+
+# libfuzzer targets (nightly only; compiled via `cargo fuzz build`).
+[[bin]]
+name = "fwpng_chunks"
+path = "fuzz_targets/fwpng_chunks.rs"
+required-features = ["fuzzer"]
+
+[[bin]]
+name = "fwpng_nodetree"
+path = "fuzz_targets/fwpng_nodetree.rs"
+required-features = ["fuzzer"]
+
+[[bin]]
+name = "fwpng_prvw"
+path = "fuzz_targets/fwpng_prvw.rs"
+required-features = ["fuzzer"]
+
+[[bin]]
+name = "fwpng_mkbt"
+path = "fuzz_targets/fwpng_mkbt.rs"
+required-features = ["fuzzer"]
+
+[[bin]]
+name = "doc_read"
+path = "fuzz_targets/doc_read.rs"
+required-features = ["fuzzer"]
+
+[[bin]]
+name = "geom_transform"
+path = "fuzz_targets/geom_transform.rs"
+required-features = ["fuzzer"]
+
+[[bin]]
+name = "vector_ops"
+path = "fuzz_targets/vector_ops.rs"
+required-features = ["fuzzer"]
+
+[[bin]]
+name = "engine_commands"
+path = "fuzz_targets/engine_commands.rs"
+required-features = ["fuzzer"]
+
+[[bin]]
+name = "svgimport"
+path = "fuzz_targets/svgimport.rs"
+required-features = ["fuzzer"]
+
+[[bin]]
+name = "psdimport"
+path = "fuzz_targets/psdimport.rs"
+required-features = ["fuzzer"]
+
+[[bin]]
+name = "gifanim"
+path = "fuzz_targets/gifanim.rs"
+required-features = ["fuzzer"]
+
+[[bin]]
+name = "expv"
+path = "fuzz_targets/expv.rs"
+required-features = ["fuzzer"]

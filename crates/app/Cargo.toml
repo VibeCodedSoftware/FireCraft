@@ -1,0 +1,52 @@
+[package]
+name = "app"
+version = "1.0.0"
+edition = "2024"
+rust-version = "1.85"
+license = "MIT OR Apache-2.0"
+authors = ["FireCraft contributors"]
+repository = "https://github.com/aliasfoxkde/FireCraft"
+homepage = "https://github.com/aliasfoxkde/FireCraft"
+description = "FireCraft editor shell: one canvas, one registry — every mutation goes through the engine. Clean-room implementation."
+
+[[bin]]
+name = "firecraft"
+path = "src/main.rs"
+
+# The Windows executable's icon (build.rs); only used when targeting Windows.
+[build-dependencies]
+winresource = "0.1"
+
+[dependencies]
+app-cli = { path = "../app-cli" }
+color = { path = "../color" }
+compose = { path = "../compose" }
+doc = { path = "../doc" }
+engine = { path = "../engine" }
+fwpng = { path = "../fwpng" }
+io = { path = "../io" }
+flate2 = "1"
+webexport = { path = "../webexport" }
+geom = { path = "../geom" }
+egui = "0.36"
+eframe = { version = "0.36", default-features = false, features = [
+    "default_fonts",
+    "glow",
+    "wayland",
+    "x11",
+] }
+serde_json = { version = "1", features = ["float_roundtrip"] }
+base64 = "0.22"
+
+# Native file pickers and message boxes for the desktop shell (the
+# browser build keeps its own bridge-driven dialogs).
+[target.'cfg(not(target_arch = "wasm32"))'.dependencies]
+rfd = "0.17"
+
+# The rich-symbol golden drives re-derivation through the M9 host;
+# the editor itself stays pure (the shell never depends on L4).
+[dev-dependencies]
+scripting = { path = "../scripting" }
+
+[lints]
+workspace = true

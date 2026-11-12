@@ -1,0 +1,31 @@
+[package]
+name = "compose"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+rust-version.workspace = true
+authors.workspace = true
+repository.workspace = true
+homepage.workspace = true
+description = "FireCraft deterministic CPU compositor: document pages to pixels."
+
+[dependencies]
+color = { path = "../color" }
+doc = { path = "../doc" }
+filters = { path = "../filters" }
+geom = { path = "../geom" }
+raster = { path = "../raster" }
+text = { path = "../text" }
+vello_cpu = { version = "0.3", default-features = false, features = ["std", "u8_pipeline"] }
+
+[dev-dependencies]
+criterion = "0.7.0"
+flate2 = "1.1.10"
+fwpng = { path = "../fwpng" }
+
+[[bench]]
+name = "render"
+harness = false
+
+[lints]
+workspace = true

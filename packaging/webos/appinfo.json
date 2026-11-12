@@ -1,0 +1,11 @@
+{
+  "id": "dev.firecraft.web",
+  "version": "0.2.3",
+  "vendor": "FireCraft",
+  "type": "web",
+  "main": "index.html",
+  "title": "FireCraft",
+  "icon": "assets/icon.png",
+  "largeIcon": "assets/largeIcon.png",
+  "bgImage": "assets/background.png"
+}

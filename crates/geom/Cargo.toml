@@ -1,0 +1,21 @@
+[package]
+name = "geom"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+rust-version.workspace = true
+authors.workspace = true
+repository.workspace = true
+homepage.workspace = true
+description = "Geometry foundations for FireCraft: affine transforms, bezier paths, bounds, hit testing."
+
+[dependencies]
+kurbo = "0.13"
+
+[features]
+# Serde support for the re-exported kurbo geometry (Affine, Point,
+# Rect): engine payloads and deltas carry these.
+serde = ["kurbo/serde"]
+
+[lints]
+workspace = true

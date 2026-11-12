@@ -1,0 +1,17 @@
+FireCraft is dual-licensed under the MIT License and the Apache License 2.0.
+
+SPDX-License-Identifier: MIT OR Apache-2.0
+
+You may use, modify, and redistribute this project under the terms of either
+license, at your option:
+
+  * LICENSE-MIT     (MIT License)
+  * LICENSE-APACHE  (Apache License, Version 2.0)
+
+Unless you explicitly state otherwise, any contribution intentionally
+submitted for inclusion in this project by you, as defined in the Apache-2.0
+license, shall be dual licensed as above, without any additional terms or
+conditions.
+
+Third-party assets and vendored research are attributed in
+docs/ATTRIBUTION.md with their own licenses.

@@ -1,0 +1,34 @@
+[package]
+name = "fwpng"
+version = "1.0.0"
+edition = "2024"
+rust-version = "1.85"
+license = "MIT OR Apache-2.0"
+authors = ["FireCraft contributors"]
+repository = "https://github.com/aliasfoxkde/FireCraft"
+homepage = "https://github.com/aliasfoxkde/FireCraft"
+description = "Reader and writer for the Adobe Fireworks PNG document format: private chunks and the mkTS node tree. Clean-room implementation."
+categories = ["parser-implementations", "multimedia::encoding"]
+keywords = ["png", "fireworks", "image", "graphics", "format"]
+
+[dependencies]
+crc32fast = "1"
+flate2 = { version = "1", default-features = false, features = ["rust_backend"] }
+png = "0.18"
+# Off by default: only the doc model's serde feature needs nodes to be
+# serializable (raw-preserved effect values ride along inside it).
+serde = { version = "1", features = ["derive"], optional = true }
+
+[features]
+serde = ["dep:serde"]
+
+[dev-dependencies]
+# Kept in lockstep with the installed wasm-bindgen-test-runner
+# (0.2.129): 0.3.79 is the test-crate release that pins
+# wasm-bindgen =0.2.129 (and js-sys =0.3.106, which eframe 0.36 can
+# also accept — the two suites coexist in one workspace lockfile).
+# Bump runner and this together.
+wasm-bindgen-test = "=0.3.79"
+
+[lints]
+workspace = true

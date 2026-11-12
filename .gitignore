@@ -1,0 +1,27 @@
+# Proprietary Adobe binaries/resources — reference only, never commit
+/source/
+
+# Rust build artifacts (future workspace)
+/target
+# fuzz/ is its own workspace (stable driver + nightly libfuzzer targets)
+/fuzz/target
+/fuzz/artifacts
+/fuzz/coverage
+/fuzz/corpus
+
+# Runtime scratch (per AGENTS.md: plan/ and log/ are untracked handoff state)
+/plan/
+/log/
+# Real Fireworks files never enter the repo; generated fixtures/ and
+# MANIFEST.tsv are tracked.
+/corpus/incoming/
+
+# trunk build output
+web/dist/
+
+# release staging (xtask dist)
+/dist/
+
+# wrangler local state
+/.wrangler/
+lcov.info

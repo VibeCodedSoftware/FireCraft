@@ -1,0 +1,50 @@
+[package]
+name = "io"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+rust-version.workspace = true
+authors.workspace = true
+repository.workspace = true
+homepage.workspace = true
+description = "FireCraft import/export codecs: raster formats, PSD, SVG."
+
+[dependencies]
+doc = { path = "../doc" }
+fwpng = { path = "../fwpng" }
+gif = "0.14.2"
+color_quant = "1.1.0"
+raster = { path = "../raster" }
+geom = { path = "../geom" }
+compose = { path = "../compose" }
+filters = { path = "../filters" }
+text = { path = "../text" }
+image = { version = "0.25.9", default-features = false, features = ["png", "jpeg", "bmp", "tiff", "gif", "webp"] }
+usvg = "0.45.1"
+jpeg-encoder = "0.6.1"
+tiff = "0.11.3"
+base64 = "0.22.1"
+
+# Lossy WebP encoding: VP8 via libwebp-sys (static linking, native only).
+# The wasm32 target cannot enable this — it gets "lossy WebP not supported
+# in browser" at the ops layer instead.
+libwebp-sys = { version = "0.14.4", optional = true }
+
+[features]
+default = []
+lossy-webp = ["libwebp-sys"]
+
+# lossy-webp requires libwebp-sys (pure-unsafe C FFI). We allow unsafe only
+# within the lossy-webp feature; the rest of the crate is forbid-safe.
+[lints.rust]
+unsafe_code = "allow"
+
+[lints.clippy]
+unwrap_used = "deny"
+expect_used = "deny"
+panic = "deny"
+unimplemented = "deny"
+unreachable = "deny"
+dbg_macro = "deny"
+print_stdout = "deny"
+exit = "deny"

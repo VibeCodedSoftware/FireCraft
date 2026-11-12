@@ -1,0 +1,45 @@
+[package]
+name = "xtask"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+rust-version.workspace = true
+authors.workspace = true
+repository.workspace = true
+homepage.workspace = true
+description = "FireCraft verification gates: ci, layers, wasm, corpus, parity, scorecard."
+
+[dependencies]
+flate2 = "1"
+png = "0.18"
+serde_json = "1"
+sha2 = "0.10"
+# Bridge-smoke host page embeds the corpus fixture inline (same
+# version io already pins — no lockfile movement).
+base64 = "0.22"
+# Scripted-shape fixture generation drives the same registry the app
+# and CLI drive (autoshape.* → doc model → canonical writer).
+engine = { path = "../crates/engine" }
+# Script-corpus harness (`xtask scripts`, M9 task 5) runs the shipped
+# .jsf corpus headless through the scripting host; serde on doc for
+# the report's document digests.
+scripting = { path = "../crates/scripting" }
+doc = { path = "../crates/doc", features = ["serde"] }
+fwpng = { path = "../crates/fwpng" }
+image-compare = "0.5.0"
+# default-features = false: `image`'s defaults enable every format codec
+# including avif → ravif → rav1e (the AV1 encoder), which otherwise lands
+# in every xtask (and therefore CI) build for one `image::open` of a PNG
+# sidecar. Only the golden machinery's PNG loads are needed here.
+image = { version = "0.25.9", default-features = false, features = ["png"] }
+compose = { version = "1.0.0", path = "../crates/compose" }
+io = { path = "../crates/io" }
+# Web-export structural pins (M11 task 6): the gate runs the same
+# pure export functions the app and CLI share.
+webexport = { path = "../crates/webexport" }
+# SVG golden loop: resvg is the independent renderer our serialized
+# SVG is checked against (M8 task 3 stopping condition).
+resvg = "0.45"
+
+[lints]
+workspace = true

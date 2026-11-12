@@ -1,0 +1,26 @@
+[package]
+name = "doc"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+rust-version.workspace = true
+authors.workspace = true
+repository.workspace = true
+homepage.workspace = true
+description = "FireCraft typed document model and its Fireworks PNG node-tree mapping."
+
+[dependencies]
+fwpng = { path = "../fwpng" }
+geom = { path = "../geom" }
+raster = { path = "../raster" }
+serde = { version = "1", features = ["derive"], optional = true }
+
+[features]
+# Serializability of the model and registry: engine payloads, deltas,
+# and journal entries all flow through serde (off by default so the
+# base model stays dependency-free). fwpng/serde covers the raw node
+# values preserved verbatim inside effect properties.
+serde = ["dep:serde", "raster/serde", "geom/serde", "fwpng/serde"]
+
+[lints]
+workspace = true
